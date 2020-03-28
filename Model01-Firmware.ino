@@ -33,7 +33,7 @@
 #include "Kaleidoscope-LEDControl.h"
 
 // Support for "Numpad" mode, which is mostly just the Numpad specific LED mode
-#include "Kaleidoscope-NumPad.h"
+// #include "Kaleidoscope-NumPad.h"
 
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
 // when the keyboard is connected to a computer (or that computer is powered on)
@@ -142,7 +142,7 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { PRIMARY, NUMPAD, FUNCTION }; // layers
+enum { PRIMARY, FUNCTION }; // layers
 
 
 /**
@@ -164,6 +164,24 @@ enum { PRIMARY, NUMPAD, FUNCTION }; // layers
 // #define PRIMARY_KEYMAP_CUSTOM
 
 
+#define Todo ___
+
+/*
+static void underscore(uint8_t keyState) {
+  if (keyToggledOn(keyState)) {
+    if (
+      kaleidoscope::hid::wasModifierKeyActive(Key_LeftShift) ||
+      kaleidoscope::hid::wasModifierKeyActive(Key_RightShift)
+    ) {
+      kaleidoscope::hid::releaseKey(Key_LeftShift);
+      kaleidoscope::hid::releaseKey(Key_RightShift);
+      kaleidoscope::hid::pressKey(Key_Minus);
+    } else {
+      kaleidoscope::hid::pressKey(Key_Minus);
+    }
+  }
+}
+*/
 
 /* This comment temporarily turns off astyle's indent enforcement
  *   so we can make the keymaps actually resemble the physical key layout better
@@ -174,19 +192,19 @@ KEYMAPS(
 
 #if defined (PRIMARY_KEYMAP_QWERTY)
   [PRIMARY] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
+  (Key_Backtick,    Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+   Key_Tab,         Key_Q, Key_W, Key_E, Key_R, Key_T, Todo,
+   Key_Escape,      Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_LeftBracket, Key_Z, Key_X, Key_C, Key_V, Key_B, Todo,
+   ___, Key_Backspace, Todo, Key_Menu,
    ShiftToLayer(FUNCTION),
 
-   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
-   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
+   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Equals,
+   Todo,          Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Backslash,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_RightAlt,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
-   Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl,
-   ShiftToLayer(FUNCTION)),
+   Key_LeftGui,   Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_RightBracket,
+   Key_RightAlt, Key_RightControl, Key_RightShift, Key_Enter,
+   Key_Spacebar),
 
 #elif defined (PRIMARY_KEYMAP_DVORAK)
 
@@ -246,7 +264,7 @@ KEYMAPS(
 #endif
 
 
-
+  /*
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
@@ -261,21 +279,23 @@ KEYMAPS(
    ___,                    ___, Key_0, Key_Period, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
    ___, ___, ___, ___,
    ___),
+  */
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           Key_CapsLock,
-   Key_Tab,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
-   Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW,
-   Key_End,  Key_PrintScreen,  Key_Insert,  ___,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
-   ___, Key_Delete, ___, ___,
+  (___, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F11,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___,
+   ___, ___, LSHIFT(Key_Comma), Key_Minus, LSHIFT(Key_Period), ___, ___,
+   ___, ___, ___, ___,
    ___,
 
-   Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
-   Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
-                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
-   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
-   ___, ___, Key_Enter, ___,
-   ___)
+   ___, Key_F6, Key_F7, Key_F8, Key_F9, Key_F10, Key_F12,
+   ___, ___, ___, ___, ___, ___, ___,
+        ___, ___, ___, ___, ___, ___,
+   ___, Key_Equals, Key_LeftArrow, Key_DownArrow, Key_UpArrow, Key_RightArrow, ___,
+   ___, ___, ___, ___,
+   ___),
+
 ) // KEYMAPS(
 
 /* Re-enable astyle's indent enforcement */
@@ -302,6 +322,7 @@ static void versionInfoMacro(uint8_t keyState) {
  */
 
 static void anyKeyMacro(uint8_t keyState) {
+  /*
   static Key lastKey;
   bool toggledOn = false;
   if (keyToggledOn(keyState)) {
@@ -311,6 +332,7 @@ static void anyKeyMacro(uint8_t keyState) {
 
   if (keyIsPressed(keyState))
     kaleidoscope::hid::pressKey(lastKey, toggledOn);
+  */
 }
 
 
@@ -497,7 +519,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The numpad plugin is responsible for lighting up the 'numpad' mode
   // with a custom LED effect
-  NumPad,
+  // NumPad,
 
   // The macros plugin adds support for macros
   Macros,
@@ -529,9 +551,11 @@ void setup() {
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
 
+  /*
   // While we hope to improve this in the future, the NumPad plugin
   // needs to be explicitly told which keymap layer is your numpad layer
   NumPad.numPadLayer = NUMPAD;
+  */
 
   // We configure the AlphaSquare effect to use RED letters
   AlphaSquare.color = CRGB(255, 0, 0);
