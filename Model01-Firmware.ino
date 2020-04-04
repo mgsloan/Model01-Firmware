@@ -284,7 +284,7 @@ KEYMAPS(
   [FUNCTION] =  KEYMAP_STACKED
   (___, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F11,
    ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, Key_R, ___,
    ___, ___, LSHIFT(Key_Comma), Key_Minus, LSHIFT(Key_Period), ___, ___,
    ___, ___, ___, ___,
    ___,
