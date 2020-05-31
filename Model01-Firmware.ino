@@ -282,14 +282,14 @@ KEYMAPS(
   */
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, Key_F11,
-   ___, ___, ___, ___, ___, ___, ___,
+  (Key_F11, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, ___,
+   Key_F12, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, Key_R, ___,
    ___, ___, LSHIFT(Key_Comma), Key_Minus, LSHIFT(Key_Period), ___, ___,
    ___, ___, ___, ___,
    ___,
 
-   ___, Key_F6, Key_F7, Key_F8, Key_F9, Key_F10, Key_F12,
+   ___, Key_F6, Key_F7, Key_F8, Key_F9, Key_F10, ___,
    ___, ___, ___, ___, ___, ___, ___,
         ___, ___, ___, ___, ___, ___,
    ___, Key_Equals, Key_LeftArrow, Key_DownArrow, Key_UpArrow, Key_RightArrow, ___,
